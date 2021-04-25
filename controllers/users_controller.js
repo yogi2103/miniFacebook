@@ -14,7 +14,7 @@ module.exports.signUp=(req,res)=>{
         return res.redirect('users/profile');
     }
 
-    return res.render('user_sign_up',{
+    return res.render('user_sign_in-up',{
         title:"MiniFacebook | Sign Up"
     })
 }
@@ -25,16 +25,17 @@ module.exports.signIn=(req,res)=>{
 
     //if user is already signed in
     if(req.isAuthenticated()){
-        return res.redirect('users/profile');
+        return res.redirect('/users/profile');
     }
 
-    return res.render('user_sign_in',{
+    return res.render('user_sign_in-up',{
         title:"MiniFacebook | Sign In"
     })
 }
 
 //get the sign-up data
 module.exports.create=(req,res)=>{
+    console.log(req.body);
     if(req.body.password!=req.body.Confirm_password){
         return res.redirect('back');
     }
@@ -50,14 +51,16 @@ module.exports.create=(req,res)=>{
                     console.log('error in creating User');
                     return;
                 }
-
-                //as user is created then redirect to sign-in page
-                return res.redirect('/users/sign-in');
+                else{
+                    //as user is created then redirect to sign-in page
+                    return res.redirect('/users/sign-in');
+                }
             })
         }
-
-        //if user is already there then redirect it to sign-in page
+        else{
+            //if user is already there then redirect it to sign-in page
         return res.redirect('/users/sign-in');
+        }   
     })
 }
 
