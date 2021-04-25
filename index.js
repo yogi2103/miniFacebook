@@ -7,7 +7,7 @@ const db=require('./config/mongoose');
 const session=require('express-session');       //for the passport
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy');
-const { pass } = require('./config/mongoose');
+const MongoStore=require('connect-mongo')(session); //if server restarts then doesn't loose current session
 
 app.use(express.urlencoded());
 app.use(cookieParser());        //for the local-auth
@@ -18,12 +18,11 @@ app.use(expressLayouts);
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 
-
-
 //set up the view engine
 app.set('view engine','ejs');
 app.set('views','./views');
 
+//Mongo store is used to store the session cookies in the db
 app.use(session({
     name:'miniFacebook',
     //change secret 
@@ -32,7 +31,14 @@ app.use(session({
     resave:false,
     cookie:{
         maxAge:(1000*60*100)
-    }
+    },
+    store: new MongoStore(
+        {
+        mongooseConnection: db,
+        autoRemove: 'disabled'
+    },(err)=>{
+        console.log(err || 'conect-mongodb setup Ok!');
+    })
 }));
 
 app.use(passport.initialize());
