@@ -67,3 +67,9 @@ module.exports.createSession=(req,res)=>{
     //tooo later
     return res.redirect('/users/profile');  
 }
+
+//for sign-out
+module.exports.destroySession=(req,res)=>{
+    req.logout();
+    return res.redirect('/');
+}
