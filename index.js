@@ -7,6 +7,7 @@ const db=require('./config/mongoose');
 const session=require('express-session');       //for the passport
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy');
+const { pass } = require('./config/mongoose');
 
 app.use(express.urlencoded());
 app.use(cookieParser());        //for the local-auth
@@ -36,6 +37,8 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
 
 //use express router
 app.use('/',require('./routes'));

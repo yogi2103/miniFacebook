@@ -8,6 +8,12 @@ module.exports.profile=(req,res)=>{
 
 //render the signup page
 module.exports.signUp=(req,res)=>{
+
+    //if user is already signed in
+    if(req.isAuthenticated()){
+        return res.redirect('users/profile');
+    }
+
     return res.render('user_sign_up',{
         title:"MiniFacebook | Sign Up"
     })
@@ -16,6 +22,12 @@ module.exports.signUp=(req,res)=>{
 
 //render the signin page
 module.exports.signIn=(req,res)=>{
+
+    //if user is already signed in
+    if(req.isAuthenticated()){
+        return res.redirect('users/profile');
+    }
+
     return res.render('user_sign_in',{
         title:"MiniFacebook | Sign In"
     })
@@ -53,5 +65,5 @@ module.exports.create=(req,res)=>{
 //sign-in and create session
 module.exports.createSession=(req,res)=>{
     //tooo later
-    return res.redirect('/');  
+    return res.redirect('/users/profile');  
 }
