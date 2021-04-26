@@ -1,4 +1,5 @@
 const Post=require('../models/post');
+const Comment=require('../models/comment');
 module.exports.create=(req,res)=>{
     Post.create({                   //here we cannot use post.create(req.body) and user should also be logged in
         content:req.body.content,
@@ -6,6 +7,22 @@ module.exports.create=(req,res)=>{
         if(err){
             console.log(err);
             return;
+        }
+        else{
+            return res.redirect('back');
+        }
+    })
+}
+
+
+module.exports.destroy=(req,res)=>{
+    Post.findById(req.params.id,(err,post)=>{
+        //to check authentication who's deleting the post
+        if(post.user == req.user.id){   //.id means converting the id to string
+            post.remove();
+            Comment.deleteMany({post:req.params.id},(err)=>{
+                return res.redirect('back');
+            })
         }
         else{
             return res.redirect('back');
