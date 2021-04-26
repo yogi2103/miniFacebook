@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git remote add origin https://github.com/yogi2103/miniFacebook.git"
+    "url": "https://github.com/yogi2103/miniFacebook.git"
   },
   "author": "Kabira21",
   "license": "ISC",
