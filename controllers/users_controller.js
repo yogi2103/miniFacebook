@@ -1,9 +1,27 @@
 const User=require('../models/user');
 
 module.exports.profile=(req,res)=>{
-    return res.render('user_profile',{
-        title:'User Profile'
-    });
+    User.findById(req.params.id,(err,user)=>{
+        return res.render('user_profile',{
+            title:'User Profile',
+            profile_user:user
+        });
+    })
+}
+
+module.exports.update=(req,res)=>{
+    if(req.user.id==req.params.id){
+        User.findByIdAndUpdate(req.params.id,req.body,(err,user)=>{
+            if(err){
+                console.log(err);
+                return;
+            }
+            return res.redirect('back');
+        })
+    }
+    else{
+        return res.status(401).send('unauthorized')
+    }
 }
 
 //render the signup page
@@ -11,7 +29,7 @@ module.exports.signUp=(req,res)=>{
 
     //if user is already signed in
     if(req.isAuthenticated()){
-        return res.redirect('users/profile');
+        return res.redirect('/');
     }
 
     return res.render('user_sign_in-up',{
@@ -25,7 +43,7 @@ module.exports.signIn=(req,res)=>{
 
     //if user is already signed in
     if(req.isAuthenticated()){
-        return res.redirect('/users/profile');
+        return res.redirect('/');
     }
 
     return res.render('user_sign_in-up',{
@@ -68,7 +86,7 @@ module.exports.create=(req,res)=>{
 //sign-in and create session
 module.exports.createSession=(req,res)=>{
     //tooo later
-    return res.redirect('/users/profile');  
+    return res.redirect('/');  
 }
 
 //for sign-out

@@ -1,5 +1,5 @@
 const Post = require('../models/post');
-
+const User=require('../models/user');
 module.exports.home = function(req, res){
     // console.log(req.cookies);
     // res.cookie('user_id', 25);
@@ -21,14 +21,17 @@ module.exports.home = function(req, res){
         }
     })
     .exec(function(err, posts){
-        if(err){
-            console.log(err);
-            return;
-        }
-        return res.render('home', {
-            title: "MiniFacebook | Home",
-            posts:  posts
-        });
+        User.find({},(err,users)=>{
+            if(err){
+                console.log(err);
+                return;
+            }
+            return res.render('home', {
+                title: "MiniFacebook | Home",
+                posts:  posts,
+                all_users:users
+            });
+        })
     })
 
 }
