@@ -1,26 +1,32 @@
 const User=require('../models/user');
 
-module.exports.profile=(req,res)=>{
-    User.findById(req.params.id,(err,user)=>{
+module.exports.profile=async (req,res)=>{
+    try{
+        await User.findById(req.params.id);
         return res.render('user_profile',{
             title:'User Profile',
             profile_user:user
         });
-    })
+    }
+    catch(err){
+        console.log(err);
+        return;
+    }
 }
 
-module.exports.update=(req,res)=>{
-    if(req.user.id==req.params.id){
-        User.findByIdAndUpdate(req.params.id,req.body,(err,user)=>{
-            if(err){
-                console.log(err);
-                return;
-            }
+module.exports.update=async (req,res)=>{
+    try{
+        if(req.user.id==req.params.id){
+            await User.findByIdAndUpdate(req.params.id,req.body);
             return res.redirect('back');
-        })
+        }
+        else{
+            return res.status(401).send('unauthorized')
+        }
     }
-    else{
-        return res.status(401).send('unauthorized')
+    catch(err){
+        console.log(err);
+        return;
     }
 }
 
@@ -52,34 +58,27 @@ module.exports.signIn=(req,res)=>{
 }
 
 //get the sign-up data
-module.exports.create=(req,res)=>{
-    console.log(req.body);
-    if(req.body.password!=req.body.Confirm_password){
-        return res.redirect('back');
-    }
-    User.findOne({email:req.body.email},(err,user)=>{
-        if(err){
-            console.log('Not able to find');
-            return;
+module.exports.create=async (req,res)=>{
+    try{
+        console.log(req.body);
+        if(req.body.password!=req.body.Confirm_password){
+            return res.redirect('back');
         }
-        //if user doesn't exist in the schema then create it
+        let user= await User.findOne({email:req.body.email});
         if(!user){
-            User.create(req.body,(err,user)=>{
-                if(err){
-                    console.log('error in creating User');
-                    return;
-                }
-                else{
-                    //as user is created then redirect to sign-in page
-                    return res.redirect('/users/sign-in');
-                }
-            })
+            await User.create(req.body);
+            //as user is created then redirect to sign-in page
+            return res.redirect('/users/sign-in');
         }
         else{
             //if user is already there then redirect it to sign-in page
-        return res.redirect('/users/sign-in');
-        }   
-    })
+            return res.redirect('/users/sign-in');
+            }   
+    }
+    catch(err){
+        console.log(err);
+        return;
+    }
 }
 
 
