@@ -2,7 +2,7 @@ const User=require('../models/user');
 
 module.exports.profile=async (req,res)=>{
     try{
-        await User.findById(req.params.id);
+        let user=await User.findById(req.params.id);
         return res.render('user_profile',{
             title:'User Profile',
             profile_user:user
