@@ -11,6 +11,11 @@
 </head>
 <body>
    <%- include('_header'); %>
+   <%if(locals.flash.success && locals.flash.success.length>0){%>
+        <h5>
+            <%= flash.success %>
+        </h5>
+   <%}%>
    
    <%- body %>
 
