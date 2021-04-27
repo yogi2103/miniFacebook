@@ -28,7 +28,7 @@
                 timeout:1500
             }).show();
         <%}%>
-        <%if(locals.flash.success && locals.flash.success.length>0){%>
+        <%if(locals.flash.error && locals.flash.error.length>0){%>
             new Noty({
                 theme:'relax',
                 text: "<%= flash.success %>",

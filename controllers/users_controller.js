@@ -68,6 +68,7 @@ module.exports.create=async (req,res)=>{
         if(!user){
             await User.create(req.body);
             //as user is created then redirect to sign-in page
+            req.flash('success','Account created Successfully!');
             return res.redirect('/users/sign-in');
         }
         else{
