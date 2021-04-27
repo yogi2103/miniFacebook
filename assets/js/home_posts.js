@@ -13,6 +13,7 @@
                 success:(data)=>{
                     let newPost= newPostDom(data.data.post);
                     $('#posts-list-container>ul').prepend(newPost);
+                    deletePost($('.delete-post-button',newPost));
                     console.log(data);
                 },error:(err)=>{
                     console.log(error.responseText);
@@ -27,25 +28,21 @@
         return $(`
         <li id="post-${post._id}">
         <p>
-            <%if(locals.user && locals.user.id==post.user.id){%>
             <small>
                 <a class="delete-post-button" href="/posts/destroy/${post._id}">X</a>     
             </small>
-        <%}%>
             ${post.content}
             <br>
             <small>
-                ${post.user}
+                ${post.user.name}
             </small>
         </p>
         <div class="post-comments">
-            <% if (locals.user){ %>
                 <form action="/comments/create" method="POST">
                     <input type="text" name="content" placeholder="Type Here to add comment...">
-                    <input type="hidden" name="post" value="${post.id}" >
+                    <input type="hidden" name="post" value="${post._id}" >
                     <input type="submit" value="Add Comment">
                 </form>
-            <% } %>
             <div class="post-comments-list">
                 <ul id="post-comments-${post._id}">
                 </ul>
@@ -57,6 +54,22 @@
         `)
     }
 
+    //method to delete a post from DOM
+    let deletePost=(deleteLink)=>{
+        $(deleteLink).click((e)=>{
+            e.preventDefault();
 
+            $.ajax({
+                type:'get',
+                url:$(deleteLink).prop('href'),
+                success:(data)=>{
+                    console.log(data.data.post_id);
+                    $(`#post-${data.data.post_id}`).remove();
+                },error:(data)=>{
+                    console.log(error.responseText);
+                }
+            });
+        });
+    }
     createPost();
 }
