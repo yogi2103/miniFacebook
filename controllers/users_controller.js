@@ -15,18 +15,31 @@ module.exports.profile=async (req,res)=>{
 }
 
 module.exports.update=async (req,res)=>{
-    try{
         if(req.user.id==req.params.id){
-            await User.findByIdAndUpdate(req.params.id,req.body);
-            return res.redirect('back');
+        try{
+            let user=await User.findById(req.params.id);
+            User.uploadedAvatar(req,res,(err)=>{
+                if(err){
+                    console.log(err);
+                    return;
+                }
+                user.name=req.body.name;
+                user.email=req.body.email;
+                if(req.file){
+                    //going to save the path of uploaded user in the schema
+                    user.avatar=user.avatarPath + '/' + req.file.name;
+                }
+                user.save();
+                return res.redirect('back');
+            });
         }
-        else{
-            return res.status(401).send('unauthorized')
+        catch(err){
+            console.log(err);
+            return;
         }
     }
-    catch(err){
-        console.log(err);
-        return;
+    else{
+        return res.status(401).send('unauthorized')
     }
 }
 
