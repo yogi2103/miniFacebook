@@ -7,6 +7,7 @@ const db=require('./config/mongoose');
 const session=require('express-session');       //for the passport
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy');
+const passportJWT=require('./config/passport-jwt-strategy');
 const MongoStore=require('connect-mongo')(session); //if server restarts then doesn't loose current session
 const sassMiddleware=require('node-sass-middleware');
 const flash=require('connect-flash');   //for flash messages
