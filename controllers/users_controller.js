@@ -27,7 +27,8 @@ module.exports.update=async (req,res)=>{
                 user.email=req.body.email;
                 if(req.file){
                     //going to save the path of uploaded user in the schema
-                    user.avatar=user.avatarPath + '/' + req.file.name;
+                    user.avatar=User.avatarPath + '/' + req.file.filename;
+                    console.log(user.avatar);
                 }
                 user.save();
                 return res.redirect('back');

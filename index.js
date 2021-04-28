@@ -23,6 +23,7 @@ app.use(express.urlencoded());
 app.use(cookieParser());        //for the local-auth
 
 app.use(express.static('./assets'));
+app.use('/uploads',express.static(__dirname + '/uploads'));     //makes the upload path availabe and connected miniFacebook folder with uploads folder
 app.use(expressLayouts);
 //extract style and scripts from subpages to layout
 app.set('layout extractStyles',true);
