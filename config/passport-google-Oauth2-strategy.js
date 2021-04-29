@@ -9,13 +9,14 @@ passport.use(new googleStrategy({
     clientSecret:'gEn-jUNRNeVmk8KUbA3gilRn',
     callbackURL:'http://localhost:8000/users/auth/google/callback',
 },(accessToken,refreshToken,profile,done)=>{
-    User.findOne({email:profile.emails[0].value.exec((err)=>{
+    User.findOne({email:profile.emails[0].value}).exec((err,user)=>{
         if(err){
             console.log('error in google strategy',err);
             return;
         }
         console.log(profile);
-        //if user exists
+
+        //if user exists then set this user as req.user
         if(user){
             return done(null,user);
         }
@@ -33,6 +34,5 @@ passport.use(new googleStrategy({
                 }
                 return done(null,user);
             })
-        }
-    })})
+    }})
 }))
