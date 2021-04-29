@@ -20,6 +20,9 @@ const userSchema=new mongoose.Schema({
     },
     avatar:{
         type:String
+    },
+    Phone:{
+        type:String
     }
 },{
     timestamps:true
