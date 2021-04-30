@@ -88,7 +88,7 @@ module.exports.create=async (req,res)=>{
         let user= await User.findOne({email:req.body.email});
         if(!user){
             let user=await User.create(req.body);
-            usersMailer.newUser
+            usersMailer.newUser(user);
             //as user is created then redirect to sign-in page
             req.flash('success','Account created Successfully!');
             return res.redirect('/users/sign-in');
