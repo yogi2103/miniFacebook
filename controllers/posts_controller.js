@@ -1,6 +1,8 @@
 const Post=require('../models/post');
 const Comment=require('../models/comment');
 const User=require('../models/user');
+const Like=require('../models/like');
+
 module.exports.create=async (req,res)=>{
     try{
         let post = await Post.create({                   //here we cannot use post.create(req.body) and user should also be logged in
@@ -29,6 +31,11 @@ module.exports.destroy=async (req,res)=>{
     try{
         let post=await Post.findById(req.params.id);
     if(post.user == req.user.id){   //.id means converting the id to string
+
+        //delete the associated likes with the posts as well as comments
+        await Like.deleteMany({likeable:post, onModel:'Post'});
+        await Like.deleteMany({_id: {$in: post.comments}});
+
         post.remove();
         await Comment.deleteMany({post:req.params.id});
         if(req.xhr){
