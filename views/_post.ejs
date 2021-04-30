@@ -11,6 +11,7 @@
             <%= post.user.name %>
         </small>
 
+        <!-- for the likes -->
         <%if(locals.user){%>
             <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%=post._id%>&type=Post">
                 <%= post.likes.length%> Likes
