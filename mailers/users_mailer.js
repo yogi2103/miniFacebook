@@ -1,16 +1,15 @@
 const nodemailer=require('../config/nodemailer');
 
 
-//another way of exporting
-exports.newComment=(comment)=>{
+exports.newUser=(user)=>{
     let htmlString=nodemailer.renderTemplate({
-        comment:comment
-    },'/comments/new_comment.ejs');
-    console.log('inside new Comment mailer');
+        user:user
+    },'/users/new_user.ejs');
+    console.log('inside user mailer');
     nodemailer.transporter.sendMail({
         from:'yogesh.baghel86@gmail.com',
-        to: comment.user.email,
-        subject: 'New comment published!',
+        to: user.email,
+        subject: 'Welcome to MiniFacebook!',
         html: htmlString
     },(err,info)=>{
         if(err){

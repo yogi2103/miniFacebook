@@ -1,7 +1,7 @@
 const User=require('../models/user');
 const fs=require('fs');
 const path=require('path');
-
+const usersMailer=require('../mailers/users_mailer');
 module.exports.profile=async (req,res)=>{
     try{
         let user=await User.findById(req.params.id);
@@ -87,7 +87,8 @@ module.exports.create=async (req,res)=>{
         }
         let user= await User.findOne({email:req.body.email});
         if(!user){
-            await User.create(req.body);
+            let user=await User.create(req.body);
+            usersMailer.newUser
             //as user is created then redirect to sign-in page
             req.flash('success','Account created Successfully!');
             return res.redirect('/users/sign-in');
