@@ -1,11 +1,11 @@
 <%if(user.id==profile_user.id){%>
     <!-- if user matches the profile -->
-    <form style="margin-left: 100px; margin-top: 50px;" action="/users/update/<%=profile_user.id%>" enctype="multipart/form-data" method="POST">
+    <form style="margin-left: 100px; margin-top: 100px;" action="/users/update/<%=profile_user.id%>" enctype="multipart/form-data" method="POST">
         <label style="color: black;" for="name">Name update</label>
         <input type="text" name="name" placeholder="Your name" value="<%=profile_user.name%>" required>
         <label style="color: black;" for="email">Email update</label>
         <input type="email" name="email" placeholder="Your email" value="<%=profile_user.email%>" required>
-        <label style="color: black;" for="avatar">Profile update</label>
+        <label style="color: black;" for="avatar">Photo update</label>
         <input type="file" name="avatar" placeholder="Upload Picture">
         <button style="margin-left: -50px;" type="submit">Update</button>
     </form>
