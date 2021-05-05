@@ -10,10 +10,18 @@ const passportLocal=require('./config/passport-local-strategy');
 const passportJWT=require('./config/passport-jwt-strategy');
 const passportGoogle=require('./config/passport-google-Oauth2-strategy');
 
+
 const MongoStore=require('connect-mongo')(session); //if server restarts then doesn't loose current session
 const sassMiddleware=require('node-sass-middleware');
 const flash=require('connect-flash');   //for flash messages
 const customMware=require('./config/middleware');
+
+//for chat engine
+const chatServer=require('http').Server(app);
+const chatSocket=require('./config/chat_socket').chatSockets(chatServer);
+chatServer.listen(5000);
+console.log('Chat server is listening on port 5000');
+
 
 app.use(sassMiddleware({
     src:'./assets/scss',
