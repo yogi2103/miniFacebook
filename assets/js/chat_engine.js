@@ -11,8 +11,20 @@ class ChatEngine{
     }
 
     connectionHandler(){
+
+        let self=this;
+
         this.socket.on('connect',()=>{
-            console.log('Connection established using Sockets...')
+            console.log('Connection established using Sockets...');
+
+            self.socket.emit('join_room',{
+                user_email:self.userEmail,
+                chatroom: 'MiniFacebook'
+            });
+            
+            self.socket.on('user_joined',function(data){
+                console.log('A user joined!',data);
+            })
         })
     }
 }
