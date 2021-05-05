@@ -17,5 +17,10 @@ module.exports.chatSockets=function(socketServer){
             //to make aware all other users in chatroom that someone new has joined the chatroom
             io.in(data.chatroom).emit('user_joined',data);
         });
+
+         //Change:: detect send_message and broadcast to everyone in the room
+         socket.on('send_message',function(data){
+            io.in(data.chatroom).emit('receive_message',data);
+        });
     });
 }
