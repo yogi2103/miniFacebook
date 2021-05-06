@@ -43,11 +43,11 @@ class ChatEngine{
             console.log('message received',data.message);   
 
             let newMessage=$('<li>');
-            let messageType='other-message';
+            let messageType='media media-chat media-chat-reverse';
             if(data.user_email==self.userEmail){
-                messageType='self-message';
+                messageType='media media-chat self';
             }
-            newMessage.append($('<span>',{
+            newMessage.append($('<p>',{
                 'html':data.message
             }));
 
