@@ -1,5 +1,6 @@
 const User=require('../../../models/user');
 const jwt=require('jsonwebtoken');
+const env=require('../../../config/environment');
 //sign-in and create session
 module.exports.createSession= async (req,res)=>{
     //tooo later
@@ -15,7 +16,7 @@ module.exports.createSession= async (req,res)=>{
             return res.json(200,{
                 message:"Sign-in Successfull here's your token! Keep it safe",
                 data:{
-                    token:jwt.sign(user.toJSON(),'MiniFacebook',{expiresIn:'100000'})
+                    token:jwt.sign(user.toJSON(),env.jwtKey,{expiresIn:'100000'})
                 }
             })            
         }
