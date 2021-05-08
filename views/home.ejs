@@ -2,6 +2,24 @@
 <link rel="stylesheet" href="/css/chat_box.css">
 <div id="home-container">
     <section id="feed-posts">
+        <div class="container bootstrap snippets bootdey">
+            <div class="row">
+        <div class="panel profile-info">
+            <form>
+                <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Whats in your mind today?"></textarea>
+            </form>
+            <footer class="panel-footer">
+                <button type="button" class="btn btn-info pull-right">Post</button>
+                <ul class="nav nav-pills">
+                    <li><a href="#"><i class="fa fa-map-marker"></i></a></li>
+                    <li><a href="#"><i class="fa fa-camera"></i></a></li>
+                    <li><a href="#"><i class=" fa fa-film"></i></a></li>
+                    <li><a href="#"><i class="fa fa-microphone"></i></a></li>
+                </ul>
+            </footer>
+          </div>
+        </div>
+        </div>
             <h4>Posts</h4>
             <% if(locals.user){ %>
             <form action="/posts/create" id="new-post-form" method="POST">
