@@ -28,11 +28,6 @@ module.exports.update=async (req,res)=>{
                 user.name=req.body.name;
                 user.email=req.body.email;
                 if(req.file){
-
-                    //to check if image is already there then delete the existing one and update with new
-                    if(user.avatar){
-                        fs.unlinkSync(path.join(__dirname ,'..',user.avatar));
-                    }
                     //going to save the path of uploaded user in the schema
                     user.avatar=User.avatarPath + '/' + req.file.filename;
                     console.log(user.avatar);
