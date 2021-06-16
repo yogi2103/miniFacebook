@@ -19,26 +19,26 @@ Here is a working live demo :  https://minifacebook-v1.herokuapp.com/
 	
 ## Technologies
 Project is created with:
-  "connect-flash": "^0.1.1",
-  "connect-mongo": "^3.2.0",
-  "cookie-parser": "^1.4.5",
-  "crypto": "^1.0.1",
-  "ejs": "^3.1.6",
-  "express": "^4.17.1",
-  "express-ejs-layouts": "^2.5.0",
-  "express-session": "^1.17.1",
-  "jsonwebtoken": "^8.5.1",
-  "mongoose": "^5.12.5",
-  "multer": "^1.4.2",
-  "node-sass": "^5.0.0",
-  "node-sass-middleware": "^0.11.0",
-  "nodemailer": "^6.6.0",
-  "nodemon": "^2.0.7",
-  "passport": "^0.4.1",
-  "passport-google-oauth": "^2.0.0",
-  "passport-jwt": "^4.0.0",
-  "passport-local": "^1.0.0",
-  "socket.io": "^4.0.1"
+ * ["connect-flash"](https://www.npmjs.com/package/connect-flash): "^0.1.1",
+ * "connect-mongo": "^3.2.0",
+ * "cookie-parser": "^1.4.5",
+ * "crypto": "^1.0.1",
+ * "ejs": "^3.1.6",
+ * "express": "^4.17.1",
+ * "express-ejs-layouts": "^2.5.0",
+ * "express-session": "^1.17.1",
+ * "jsonwebtoken": "^8.5.1",
+ * "mongoose": "^5.12.5",
+ * "multer": "^1.4.2",
+ * "node-sass": "^5.0.0",
+ * "node-sass-middleware": "^0.11.0",
+ * "nodemailer": "^6.6.0",
+ * "nodemon": "^2.0.7",
+ * "passport": "^0.4.1",
+ * "passport-google-oauth": "^2.0.0",
+ * "passport-jwt": "^4.0.0",
+ * "passport-local": "^1.0.0",
+ * "socket.io": "^4.0.1"
 	
 ## Setup
 To run this project, install it locally using npm:
