@@ -1,28 +1,28 @@
 const development={
-    name:'development',
-    asset_path:'/assets',
-    sesion_cookie_key: 'howdyman',
-    db: 'miniFacebook_development',
+    name:'development'
+}
+
+const production={
+    name:'production',
+    asset_path: process.env.MINIFACEBOOK_ASSET_PATH,
+    sesion_cookie_key: process.env.MINIFACEBOOK_sesion_cookie_key,
+    db: process.env.MINIFACEBOOK_db,
     smtp:{
         service:'gmail',
         host:'smptp.gmail',
         port:587,
         secure: false,
         auth:{
-            user: 'yogesh.baghel86@gmail.com',
-            pass: 'sabmohmayahai'
+            user: process.env.MINIFACEBOOK_user,
+            pass: process.env.MINIFACEBOOK_pass
         }
     },
     oauth:{
-        clientID:'899850578427-kjco7aebhm0ipns8b5gib6onfe1rs1di.apps.googleusercontent.com',
-        clientSecret:'gEn-jUNRNeVmk8KUbA3gilRn',
-        callbackURL:'http://localhost:8000/users/auth/google/callback',
+        clientID: process.env.MINIFACEBOOK_clientID,
+        clientSecret:process.env.MINIFACEBOOK_clientSecret,
+        callbackURL:process.env.MINIFACEBOOK_callbackURL,
     },
-    jwtKey: 'MiniFacebook'
+    jwtKey: process.env.MINIFACEBOOK_jwtKey
 }
 
-const production={
-    name:'production'
-}
-
-module.exports=development;
+module.exports = eval(process.env.CODEIAL_ENVIRONMENT) == undefined ? development : eval(process.env.CODEIAL_ENVIRONMENT);

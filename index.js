@@ -1,9 +1,8 @@
 const express=require('express'); 
-const env=require('./config/environment');
 const cookieParser = require('cookie-parser');
 const app=express();
 const expressLayouts=require('express-ejs-layouts');
-const port=8000;
+const port=process.env.PORT || 8000;
 const db=require('./config/mongoose');
 const session=require('express-session');       //for the passport
 const passport=require('passport');
@@ -24,11 +23,9 @@ chatServer.listen(5000);
 console.log('Chat server is listening on port 5000');
 
 
-const path=require('path');
-
 app.use(sassMiddleware({
-    src: path.join(__dirname,env.asset_path,'scss'),
-    dest:path.join(__dirname,env.asset_path,'css'),
+    src:'./assets/scss',
+    dest:'./assets/css',
     debug:true,
     outputStyle:'extended',
     prefix:'/css'
@@ -36,7 +33,7 @@ app.use(sassMiddleware({
 app.use(express.urlencoded());
 app.use(cookieParser());        //for the local-auth
 
-app.use(express.static(env.asset_path));
+app.use(express.static('./assets'));
 app.use('/uploads',express.static(__dirname + '/uploads'));     //makes the upload path availabe and connected miniFacebook folder with uploads folder
 app.use(expressLayouts);
 //extract style and scripts from subpages to layout
@@ -51,7 +48,7 @@ app.set('views','./views');
 app.use(session({
     name:'miniFacebook',
     //change secret 
-    secret: env.sesion_cookie_key,
+    secret:'howdyman',
     saveUninitialized:false,
     resave:false,
     cookie:{
