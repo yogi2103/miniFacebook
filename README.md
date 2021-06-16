@@ -20,9 +20,9 @@ Here is a working live demo :  https://minifacebook-v1.herokuapp.com/
 ## Technologies
 Project is created with:
  * ["connect-flash"](https://www.npmjs.com/package/connect-flash): "^0.1.1",
- * "connect-mongo": "^3.2.0",
- * "cookie-parser": "^1.4.5",
- * "crypto": "^1.0.1",
+ * ["connect-mongo"](https://www.npmjs.com/package/connect-mongo): "^3.2.0",
+ * ["cookie-parser"](https://www.npmjs.com/package/cookie-parser): "^1.4.5",
+ * ["crypto"](https://www.npmjs.com/package/crypto-js): "^1.0.1",
  * "ejs": "^3.1.6",
  * "express": "^4.17.1",
  * "express-ejs-layouts": "^2.5.0",
