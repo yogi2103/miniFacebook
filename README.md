@@ -1,4 +1,4 @@
-# !miniFacebook(https://github.com/yogi2103/miniFacebook/blob/master/images/Homepage/Home_Page.png)
+# ![miniFacebook](https://github.com/yogi2103/miniFacebook/blob/master/images/Homepage/Home_Page.png)
 
 # MiniFacebook
 <table>
